@@ -1,0 +1,2 @@
+# tikinter-progressbar-practice
+tkinterで処理中にのみprogressbarを表示するコードの練習用リポジトリ
