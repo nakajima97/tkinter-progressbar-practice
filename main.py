@@ -8,10 +8,12 @@ import threading
 def button_click(event):
   thread1 = threading.Thread(target=wait_10_second)
   thread1.start()
+  progressbar.start()
 
 def wait_10_second():
   time.sleep(10)
   messagebox.showinfo("処理終了", "10秒経過しました。")
+  progressbar.stop()
   return "break"
 
 if __name__ == '__main__':
@@ -26,11 +28,13 @@ if __name__ == '__main__':
 
   # 各種ウィジェットの作成
   button = tk.Button(frame, text="ボタン")
+  progressbar = ttk.Progressbar(frame, maximum=100, mode="indeterminate")
 
   # bind
   button.bind("<Button-1>", button_click)
 
   # 各種ウィジェットの設置
-  button.pack()
+  button.grid(row=0, column=0)
+  progressbar.grid(row=1, column=0)
 
   root.mainloop()
