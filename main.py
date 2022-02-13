@@ -1,25 +1,31 @@
+from time import sleep
 import tkinter as tk
+from tkinter import messagebox
+import tkinter.ttk as ttk
+import time
 
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.master = master
-        self.pack()
-        self.create_widgets()
+def wait_10_second(event):
+  time.sleep(10)
+  messagebox.showinfo("処理終了", "10秒経過しました。")
+  return "break"
 
-    def create_widgets(self):
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "Hello World\n(click me)"
-        self.hi_there["command"] = self.say_hi
-        self.hi_there.pack(side="top")
+if __name__ == '__main__':
+  # rootメインウィンドウの設定
+  root = tk.Tk()
+  root.title("tkinter application")
+  root.geometry("200x100")
 
-        self.quit = tk.Button(self, text="QUIT", fg="red",
-                              command=self.master.destroy)
-        self.quit.pack(side="bottom")
+  # メインフレームの作成と設置
+  frame = ttk.Frame(root)
+  frame.pack(fill = tk.BOTH, padx=20,pady=10)
 
-    def say_hi(self):
-        print("hi there, everyone!")
+  # 各種ウィジェットの作成
+  button = tk.Button(frame, text="ボタン")
 
-root = tk.Tk()
-app = Application(master=root)
-app.mainloop()
+  # bind
+  button.bind("<Button-1>", wait_10_second)
+
+  # 各種ウィジェットの設置
+  button.pack()
+
+  root.mainloop()
